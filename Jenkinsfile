@@ -8,7 +8,7 @@ node {
     /*Building Test Environemnt*/
     stage('Building Test Environment') {
         script {
-            withDockerRegistry(['https://registry.hub.docker.com', 'dockerhub-credentials') {
+            withDockerRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
                 sh 'docker pull galloandreas/website:features)'
             }
         } 
