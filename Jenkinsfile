@@ -8,7 +8,7 @@ node {
     /*Building Test Environemnt*/ 
     stage('Building Test Environment') {
         withCredentials([usernamePassword( credentialsId: 'dockerhub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+            docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
                 sh "docker login -u ${USERNAME} -p ${PASSWORD}"
                 sh 'docker pull galloandreas/website:features)'
             }
