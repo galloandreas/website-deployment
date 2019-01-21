@@ -7,12 +7,20 @@ node {
 
     /*Building Test Environemnt*/ 
     stage('Building Test Environment') {
+        /*Download new Docker Image from DockerHub*/
         withCredentials([usernamePassword( credentialsId: 'dockerhub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
             docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
                 sh "docker login -u ${USERNAME} -p ${PASSWORD}"
                 sh 'docker pull galloandreas/website:features'
             }
         }
+
+        /*Stopping and removing previous Test Environments*/
+        sh 'docker stop website:features'
+        sh 'docker rm website:features'
+
+        /*Starting new Test Environment*/
+        sh 'docker run -d --name website:features -p 8000:8000 galloandreas/website:features'
     }
 
 
