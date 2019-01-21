@@ -16,11 +16,12 @@ node {
         }
 
         /*Stopping and removing previous Test Environments*/
-        sh 'docker stop website:features'
-        sh 'docker rm website:features'
+        sh 'docker ps -f name=website:features -q | xargs --no-run-if-empty docker container stop'
+        sh 'docker ps -f name=website:features -q | xargs --no-run-if-empty docker container rm'
 
         /*Starting new Test Environment*/
-        sh 'docker run -d --name website:features -p 8000:8000 galloandreas/website:features'
+        sh  'docker run -d --name website:features -p 8000:8000 galloandreas/website'
+
     }
 
 
