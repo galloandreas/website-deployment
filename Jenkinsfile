@@ -10,7 +10,7 @@ node {
         withCredentials([usernamePassword( credentialsId: 'dockerhub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
             docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
                 sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-                sh 'docker pull galloandreas/website:features)'
+                sh 'docker pull galloandreas/website:features'
             }
         }
     }
